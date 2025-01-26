@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Find CUDA Toolkit
+set(CUDA_TOOLKIT_ROOT_DIR "/usr/local/cuda-12.6") 
 find_package(CUDAToolkit REQUIRED)
 
 # Find GoogleTest

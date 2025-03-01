@@ -22,23 +22,33 @@ void print2D(Layout<Shape,Stride> const& layout)
 }
 
 void print1Dexamples() {
-  std::cout << "1D Visualization: " << "\n";
+  std::cout << "1D Visualization:\n\n";
   Layout s8 = make_layout(Int<8>{});
   Layout d8 = make_layout(8);
-  std::cout << "s8" << "\n";
+  std::cout << "Layout (s8): ";
+  print(s8);
+  std::cout << "\n";
   print1D(s8);
-  std::cout << "d8" << "\n";
+  std::cout << "\nLayout (d8): ";
+  print(d8);
+  std::cout << "\n";
   print1D(d8);
+  std::cout << "\n";
 }
 
 void print2Dexamples() {
-  std::cout << "2D Visualization: " << "\n";
+  std::cout << "2D Visualization:\n\n";
   Layout s2xs4 = make_layout(make_shape(Int<2>{},Int<4>{}));
   Layout s2xd4 = make_layout(make_shape(Int<2>{},4));
-  std::cout << "s2xs4" << "\n";
+  std::cout << "Layout (s2xs4): ";
+  print(s2xs4);
+  std::cout << "\n";
   print2D(s2xs4);
-  std::cout << "s2xd4" << "\n";
+  std::cout << "\nLayout (s2xd4): ";
+  print(s2xd4);
+  std::cout << "\n";
   print2D(s2xd4);
+  std::cout << "\n";
 }
 
 int main() {

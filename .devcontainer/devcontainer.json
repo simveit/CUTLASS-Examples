@@ -3,7 +3,7 @@
   "build": {
     "dockerfile": "../docker/cuda.Dockerfile"
   },
-  "runArgs": ["--gpus", "device=0"]
+  "runArgs": ["--gpus", "device=7"]
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],
 

@@ -87,3 +87,31 @@ As above we parametrize over the type of the vector to copy. We also parametrize
 ```
 
 We access the specific tile tile. We than partition the tile according to the thread layout and access the corresponding element for the current thread.
+
+
+```cpp
+    auto const identity_tensor{cute::make_identity_tensor(
+        cute::make_shape(cute::size(global_tile_src)))};
+    auto const thread_identity_tensor{
+        cute::local_partition(identity_tensor, ThreadLayout{}, threadIdx.x)};
+
+    auto fragment{cute::make_fragment_like(thread_global_tile_src)};
+    auto predicator{
+        cute::make_tensor<bool>(cute::make_shape(cute::size(fragment)))};
+
+    constexpr auto tile_size{cute::size<0>(global_tile_src)};
+
+    CUTE_UNROLL
+    for (unsigned int i{0}; i < cute::size(predicator); ++i)
+    {
+        auto const thread_identity{thread_identity_tensor(i)};
+        bool const is_in_bound{
+            cute::get<0>(thread_identity) + blockIdx.x * tile_size < size};
+        predicator(i) = is_in_bound;
+    }
+
+    cute::copy_if(predicator, thread_global_tile_src, fragment);
+    cute::copy_if(predicator, fragment, thread_global_tile_dst);
+```
+
+This is the main logic. We use a predicator to use it for bound checking. We than use `cute::copy_if` to copy the vector.

@@ -1,0 +1,7 @@
+CompileFlags:
+  Add:
+    - -I/workspaces/CUTLASS-Examples/cutlass/include/
+    - -I/workspaces/CUTLASS-Examples/cutlass/tools/util/include/
+    - -I/workspaces/CUTLASS-Examples/cutlass/examples/common/
+    - -I/usr/local/cuda/include/
+    - -std=c++17 
